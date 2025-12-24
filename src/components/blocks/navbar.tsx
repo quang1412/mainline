@@ -5,9 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { ChevronRight, Github } from "lucide-react";
-
+import { ChevronRight, Github, UserStar } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -120,18 +118,25 @@ export const Navbar = () => {
         {/* Auth Buttons */}
         <div className="flex items-center gap-2.5">
           <ThemeToggle />
-          <Link href="/login" className="max-lg:hidden">
+
+          <Link href="/dashboard" className="text-muted-foreground">
+            {/* <Button variant="outline"className="!p-2 "> */}
+              <UserStar  className="size-5" />
+            {/* </Button> */}
+          </Link>
+
+          {/* <Link href="/auth/login" className="max-lg:hidden">
             <Button variant="outline">
               <span className="relative z-10">Login</span>
             </Button>
-          </Link>
-          <a
+          </Link> */}
+          {/* <a
             href="https://github.com/shadcnblocks/mainline-nextjs-template"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <Github className="size-4" />
             <span className="sr-only">GitHub</span>
-          </a>
+          </a> */}
 
           {/* Hamburger Menu Button (Mobile Only) */}
           <button

@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  allowedDevOrigins: ['192.168.1.197', '*.local-origin.dev'],
 };
 const withMDX = createMDX({
   options: {

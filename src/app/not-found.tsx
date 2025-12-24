@@ -1,12 +1,16 @@
 import Link from "next/link";
 
 import { ArrowLeft } from "lucide-react";
+import { Navbar } from "@/components/blocks/navbar";
 
 import { Background } from "@/components/background";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
+    <>
+    
+    <Navbar/>
     <Background>
       <div className="container flex min-h-[70vh] flex-col items-center justify-center py-28 text-center lg:min-h-[80vh] lg:py-32">
         <div className="relative z-10 max-w-2xl">
@@ -38,5 +42,7 @@ export default function NotFound() {
         </div>
       </div>
     </Background>
+    </>
+
   );
 }
