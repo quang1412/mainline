@@ -3,9 +3,9 @@ import localFont from "next/font/local";
 
 import type { Metadata } from "next";
 
-
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/globals.css";
+import HolyLoader from "holy-loader";
 
 const dmSans = localFont({
   src: [
@@ -144,6 +144,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <HolyLoader />
           {children}
         </ThemeProvider>
       </body>

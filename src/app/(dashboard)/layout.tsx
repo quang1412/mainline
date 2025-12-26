@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { AppSidebar } from "@/components/app-sidebar"
+import Link from "next/link";
+import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,14 +7,13 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-
+} from "@/components/ui/sidebar";
 
 export default function Layout({
   children,
@@ -22,7 +21,6 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
@@ -36,9 +34,7 @@ export default function Layout({
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <Link  href="/dashboard">
-                    Dashboard
-                  </Link>
+                  <Link href="/dashboard">Dashboard</Link>
                   {/* <BreadcrumbLink> */}
                   {/* </BreadcrumbLink> */}
                 </BreadcrumbItem>
@@ -53,5 +49,5 @@ export default function Layout({
         {children}
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
