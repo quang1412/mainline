@@ -8,7 +8,7 @@ type MainProps = React.HTMLAttributes<HTMLElement> & {
 
 export function Main({ fixed, className, fluid, ...props }: MainProps) {
   return (
-    <section
+    <main
       data-layout={fixed ? "fixed" : "auto"}
       className={cn(
         "flex flex-1 flex-col gap-4 p-4 pt-0",

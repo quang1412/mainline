@@ -21,3 +21,39 @@ export function ThemeToggle() {
     </Button>
   );
 }
+
+// function ThemeToggle({ initialValue }: { initialValue: string }) {
+//   // const { theme, setTheme } = useTheme();
+//   const [theme, setTheme] = useState(initialValue);
+
+//   useEffect(() => {
+//     // Sync the theme to the DOM attribute and cookie whenever it changes
+//     document.documentElement.setAttribute("data-theme", theme || "light");
+//     document.cookie = `theme=${theme};path=/;max-age=31536000`; // Persist for 1 year
+//     // theme && setNextTheme(theme);
+//   }, [theme]);
+
+//   const toggleTheme = () => {
+//     setTheme(theme === "dark" ? "light" : "dark");
+//   };
+
+//   return (
+//     <button onClick={toggleTheme}>{theme === "dark" ? "Light" : "Dark"}</button>
+//   );
+// }
+
+// // Export a wrapper to pass initial theme from server
+// export default function ThemeToggleWrapper() {
+//   const [initialTheme, setInitialTheme] = useState("light"); // Default client state
+
+//   // This useEffect runs only on the client
+//   useEffect(() => {
+//     // Read initial theme from document attribute set by the server
+//     const initial = document.documentElement.getAttribute("data-theme");
+//     if (initial) {
+//       setInitialTheme(initial);
+//     }
+//   }, []);
+
+//   return <ThemeToggle initialValue={initialTheme} />;
+// }

@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, Github, UserStar } from "lucide-react";
+import { ChevronRight, UserStar } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -121,7 +121,7 @@ export const Navbar = () => {
 
           <Link href="/dashboard" className="text-muted-foreground">
             {/* <Button variant="outline"className="!p-2 "> */}
-              <UserStar  className="size-5" />
+            <UserStar className="size-5" />
             {/* </Button> */}
           </Link>
 

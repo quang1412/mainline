@@ -38,41 +38,44 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   };
 
   return (
-    <ScrollArea
-      className="bg-muted/50 w-130 max-w-full rounded-xl px-1 whitespace-nowrap"
-      // orientation='horizontal'
-      type="always"
-      // className='w-full min-w-40 bg-background px-1 py-2 '
-    >
-      <nav
-        className={cn(
-          "flex space-x-2 py-1 lg:flex-col lg:space-y-1 lg:space-x-0",
-          className,
-        )}
-        {...props}
+    <div className="w-full">
+      <ScrollArea
+        className="h-auto rounded-xl border px-1 lg:h-[calc(100vh-13em)] lg:max-h-100 lg:min-h-50"
+        // orientation='horizontal'
+        // type="always"
+        // className='w-full min-w-40 bg-background px-1 py-2 '
       >
-        {items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              buttonVariants({
-                variant: "ghost",
-                size: "sm",
-                className: "rounded-lg",
-              }),
-              pathname === item.href
-                ? "bg-white hover:bg-white dark:text-black dark:hover:bg-white"
-                : "hover:bg-white hover:underline dark:hover:bg-white dark:hover:text-black",
-              "justify-start",
-            )}
-          >
-            <span className="me-2">{item.icon}</span>
-            {item.title}
-          </Link>
-        ))}
-      </nav>
-      <ScrollBar orientation="horizontal" className="hidden" />
-    </ScrollArea>
+        <ScrollBar orientation="horizontal" className="hidden" />
+        <ScrollBar orientation="vertical" className="hidden" />
+        <nav
+          className={cn(
+            "flex space-x-2 py-1 lg:flex-col lg:space-y-1 lg:space-x-0",
+            className,
+          )}
+          {...props}
+        >
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                buttonVariants({
+                  variant: "ghost",
+                  size: "sm",
+                  className: "rounded-lg",
+                }),
+                pathname === item.href
+                  ? "bg-muted hover:bg-muted dark:hover:bg-muted"
+                  : "hover:bg-muted dark:hover:bg-muted hover:underline",
+                "justify-start",
+              )}
+            >
+              <span className="me-2">{item.icon}</span>
+              {item.title}
+            </Link>
+          ))}
+        </nav>
+      </ScrollArea>
+    </div>
   );
 }

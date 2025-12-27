@@ -3,7 +3,8 @@ import localFont from "next/font/local";
 
 import type { Metadata } from "next";
 
-import { ThemeProvider } from "@/components/theme-provider";
+import Providers from "@/providers";
+// import { ThemeProvider } from "@/components/theme-provider";
 import "@/styles/globals.css";
 import HolyLoader from "holy-loader";
 
@@ -122,14 +123,22 @@ export const metadata: Metadata = {
     creator: "@ausrobdev",
   },
 };
+import { cookies } from "next/headers";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const savedTheme = (await cookies()).get("theme")?.value || "light"; // Default to light if no cookie is found
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      data-theme={savedTheme}
+      className={savedTheme}
+      style={{ colorScheme: savedTheme }}
+    >
       <head>
         <script
           async
@@ -138,15 +147,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           <HolyLoader />
           {children}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
