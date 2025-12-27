@@ -40,7 +40,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   return (
     <div className="w-full">
       <ScrollArea
-        className="h-auto rounded-xl border px-1 lg:h-[calc(100vh-13em)] lg:max-h-100 lg:min-h-20"
+        className="bg-muted lg:bg-background h-auto rounded-xl px-1 lg:h-auto lg:max-h-100 lg:min-h-20"
         // orientation='horizontal'
         // type="always"
         // className='w-full min-w-40 bg-background px-1 py-2 '
@@ -65,9 +65,11 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
                   className: "rounded-lg",
                 }),
                 pathname === item.href
-                  ? "bg-muted hover:bg-muted dark:hover:bg-muted"
-                  : "hover:bg-muted dark:hover:bg-muted hover:underline",
+                  ? "lg:bg-muted lg:dark:bg-muted bg-white dark:bg-black/90"
+                  : "hover:underline",
                 "justify-start",
+                "hover:bg-white dark:hover:bg-black/90",
+                "lg:hover:bg-muted lg:dark:hover:bg-muted",
               )}
             >
               <span className="me-2">{item.icon}</span>

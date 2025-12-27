@@ -38,7 +38,7 @@ export default function SettingsLayout({
 }>) {
   return (
     <>
-      <Main className="">
+      <Main>
         <div className="space-y-0.5">
           <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
             Settings
@@ -47,13 +47,14 @@ export default function SettingsLayout({
             Manage your account settings and set e-mail preferences.
           </p>
         </div>
-        <Separator className="my-2 lg:my-2" />
+
+        <Separator className="my-1 lg:my-2" />
+
         <div className="flex flex-1 flex-col space-y-2 overflow-hidden md:space-y-2 lg:flex-row lg:space-y-0 lg:space-x-4">
           <aside className="top-0 flex lg:sticky lg:w-1/3 xl:w-1/4 2xl:w-1/4">
             <SidebarNav items={sidebarNavItems} />
           </aside>
-          {/* h-full */}
-          <div className="flex h-full w-full p-1">
+          <div className="flex w-full grow p-1">
             <>{children}</>
           </div>
         </div>
