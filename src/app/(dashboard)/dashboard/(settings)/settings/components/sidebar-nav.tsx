@@ -40,7 +40,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   return (
     <div className="w-full">
       <ScrollArea
-        className="h-auto rounded-xl border px-1 lg:h-[calc(100vh-13em)] lg:max-h-100 lg:min-h-50"
+        className="h-auto rounded-xl border px-1 lg:h-[calc(100vh-13em)] lg:max-h-100 lg:min-h-20"
         // orientation='horizontal'
         // type="always"
         // className='w-full min-w-40 bg-background px-1 py-2 '
