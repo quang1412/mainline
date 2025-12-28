@@ -9,7 +9,7 @@ type ContentSectionProps = {
 
 export function ContentSection({ title, desc, children }: ContentSectionProps) {
   return (
-    <div className="flex w-full flex-col overflow-hidden rounded-xl lg:rounded-b-3xl">
+    <div className="flex w-full flex-col overflow-hidden lg:rounded-b-3xl">
       <ScrollArea className="faded-bottom h-30 flex-none grow scroll-smooth">
         <div className="pe-4">
           <div className="">

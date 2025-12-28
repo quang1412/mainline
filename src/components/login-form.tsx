@@ -39,12 +39,19 @@ export function LoginForm({
       });
       if (error) throw error;
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      return router.push("/dashboard");
+
+      //delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      if (typeof window !== "undefined") {
+        window.location.href = "/dashboard";
+      }
+      // return router.push("/dashboard");
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
       // setIsLoading(false)
-      setTimeout(() => setIsLoading(false), 1000);
+      setTimeout(() => setIsLoading(false), 1500);
     }
   };
 

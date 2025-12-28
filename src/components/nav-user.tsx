@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   BadgeCheck,
@@ -7,13 +7,10 @@ import {
   CreditCard,
   LogOut,
   Sparkles,
-} from "lucide-react"
+} from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,45 +19,51 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-import { User } from "@supabase/supabase-js"
-import { createClient } from '@/lib/supabase/client'
+import { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 // import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 // import { useCurrentUser } from "@/hooks/use-current-user"
 
-
-export function NavUser({user}: {
-  user: User|null
-}) {
+export function NavUser({ user }: { user: User | null }) {
   const router = useRouter();
-  const { isMobile } = useSidebar()
+  const { isMobile } = useSidebar();
   // const user = useCurrentUser();
 
-  if(!user) return <>Login please!</>;
+  if (!user)
+    return (
+      <div className="flex items-center space-x-4">
+        <Skeleton className="h-12 w-12 rounded-full bg-black/10 dark:bg-white/10" />
+        <div className="grow space-y-2">
+          <Skeleton className="h-4 w-[50%] bg-black/10 dark:bg-white/10" />
+          <Skeleton className="h-4 w-full bg-black/10 dark:bg-white/10" />
+        </div>
+      </div>
+    );
 
   const profileImage = user.user_metadata.avatar_url;
   const email = user.email;
-  const userName = (user.user_metadata.full_name ?? 'no name');
+  const userName = user.user_metadata.full_name ?? "no name";
   const initials = userName
-    ?.split(' ')
-    ?.map((word:string) => word[0])
-    ?.join('')
-    ?.toUpperCase()
-  
+    ?.split(" ")
+    ?.map((word: string) => word[0])
+    ?.join("")
+    ?.toUpperCase();
+
   const handleLogout = async () => {
-    if(!window.confirm('Logout??')) return false;
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/auth/login')
-  }
+    if (!window.confirm("Logout??")) return false;
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/auth/login");
+  };
 
   return (
     <SidebarMenu>
@@ -73,9 +76,13 @@ export function NavUser({user}: {
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                {profileImage && <AvatarImage src={profileImage} alt={initials} />}
+                {profileImage && (
+                  <AvatarImage src={profileImage} alt={initials} />
+                )}
 
-                <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
+                <AvatarFallback className="rounded-lg">
+                  {initials}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{userName}</span>
@@ -93,8 +100,12 @@ export function NavUser({user}: {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  {profileImage && <AvatarImage src={profileImage} alt={initials} />}
-                  <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
+                  {profileImage && (
+                    <AvatarImage src={profileImage} alt={initials} />
+                  )}
+                  <AvatarFallback className="rounded-lg">
+                    {initials}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{userName}</span>
@@ -125,7 +136,11 @@ export function NavUser({user}: {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive" className="cursor-pointer" onSelect={handleLogout}>
+            <DropdownMenuItem
+              variant="destructive"
+              className="cursor-pointer"
+              onSelect={handleLogout}
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>
@@ -133,5 +148,5 @@ export function NavUser({user}: {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }
