@@ -30,11 +30,15 @@ function scrollParentToCenterChildHorizontal(
   //  target scroll position
   const newScrollLeft = childOffsetLeft - parentWidth / 2 + childWidth / 2;
 
-  // Set the scroll position (smooth behavior needs CSS scroll-behavior: smooth)
-  parentElement.scrollTo({
-    left: newScrollLeft,
-    behavior: "auto", // smooth | auto
-  });
+  if (typeof window != undefined) {
+    window.setTimeout(() => {
+      // Set the scroll position (smooth behavior needs CSS scroll-behavior: smooth)
+      parentElement.scrollTo({
+        left: newScrollLeft,
+        behavior: "smooth", // smooth | auto
+      });
+    }, 100);
+  }
 }
 
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
@@ -69,7 +73,6 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
         <ScrollBar orientation="vertical" className="hidden" />
         <nav
           className={cn(
-            "sticky",
             "flex space-x-2 py-1 lg:flex-col lg:space-y-1 lg:space-x-0",
             className,
           )}
@@ -94,8 +97,6 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
                 "justify-start",
                 "hover:bg-white dark:hover:bg-black/90",
                 "lg:hover:bg-muted lg:dark:hover:bg-muted",
-
-                "",
               )}
             >
               <span className="me-2">{item.icon}</span>
