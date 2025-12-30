@@ -27,16 +27,16 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import { User } from "@supabase/supabase-js";
+// import { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 // import { Button } from '@/components/ui/button'
 import { useRouter } from "next/navigation";
-// import { useCurrentUser } from "@/hooks/use-current-user"
+import { useCurrentUser } from "@/hooks/use-current-user";
 
-export function NavUser({ user }: { user: User | null }) {
+export function NavUser() {
+  const user = useCurrentUser();
   const router = useRouter();
   const { isMobile } = useSidebar();
-  // const user = useCurrentUser();
 
   if (!user)
     return (

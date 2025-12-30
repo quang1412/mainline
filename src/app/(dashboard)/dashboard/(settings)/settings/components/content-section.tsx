@@ -18,7 +18,7 @@ export function ContentSection({ title, desc, children }: ContentSectionProps) {
           </div>
           <Separator className="my-4" />
           <div className="w-full">
-            <div className="-mx-1 px-1.5 pb-24 lg:max-w-xl">{children}</div>
+            <div className="-mx-1 px-1.5 md:pb-24 lg:max-w-xl">{children}</div>
           </div>
           <ScrollBar orientation="vertical" />
         </div>

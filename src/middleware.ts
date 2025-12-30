@@ -1,16 +1,16 @@
-import { updateSession } from '@/lib/supabase/middleware'
-import { type NextRequest, NextResponse } from 'next/server'
+import { updateSession } from "@/lib/supabase/middleware";
+import { type NextRequest, NextResponse } from "next/server";
 
-const publicPaths = ['/', '/about', '/pricing', '/faq', '/contact'];
+const publicPaths = ["/", "/about", "/pricing", "/faq", "/contact"];
 
 export async function middleware(request: NextRequest) {
   const currentPathname = request.nextUrl.pathname;
 
-  if(publicPaths.some(path => currentPathname == path)){
+  if (publicPaths.some((path) => currentPathname == path)) {
     return NextResponse.next();
   }
 
-  return await updateSession(request)
+  return await updateSession(request);
 }
 
 export const config = {
@@ -23,7 +23,7 @@ export const config = {
      * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
      * Feel free to modify this pattern to include more paths.
      */
-    // '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-    '/dashboard/:path*'
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/dashboard/:path*",
   ],
-}
+};

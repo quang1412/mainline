@@ -38,14 +38,14 @@ export function LoginForm({
         password,
       });
       if (error) throw error;
+
       // Update this route to redirect to an authenticated route. The user already has an active session.
-
-      //delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
       if (typeof window !== "undefined") {
         window.location.href = "/dashboard";
       }
+
+      //delay
+      return await new Promise((resolve) => setTimeout(resolve, 5000));
       // return router.push("/dashboard");
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
@@ -56,8 +56,8 @@ export function LoginForm({
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+    <div className={cn("", className)} {...props}>
+      <Card className="mx-auto w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>

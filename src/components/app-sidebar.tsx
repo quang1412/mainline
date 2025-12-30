@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-// import { Suspense } from "react";
-
 import Link from "next/link";
 import {
   BookOpen,
@@ -31,7 +29,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
+// import { useEffect, useState, useRef } from "react";
+// import { type User } from "@supabase/supabase-js";
 
 const data = {
   user: {
@@ -40,76 +39,76 @@ const data = {
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
-    // {
-    //   title: "Playground",
-    //   url: "#",
-    //   icon: SquareTerminal,
-    //   isActive: true,
-    //   items: [
-    //     {
-    //       title: "History",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Starred",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Settings",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
+    {
+      title: "Playground",
+      url: "#",
+      icon: SquareTerminal,
+      isActive: false,
+      items: [
+        {
+          title: "History",
+          url: "#",
+        },
+        {
+          title: "Starred",
+          url: "#",
+        },
+        {
+          title: "Settings",
+          url: "#",
+        },
+      ],
+    },
 
-    // {
-    //   title: "Models",
-    //   url: "#",
-    //   icon: Bot,
-    //   items: [
-    //     {
-    //       title: "Genesis",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Explorer",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Quantum",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
+    {
+      title: "Models",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "Genesis",
+          url: "#",
+        },
+        {
+          title: "Explorer",
+          url: "#",
+        },
+        {
+          title: "Quantum",
+          url: "#",
+        },
+      ],
+    },
 
-    // {
-    //   title: "Documentation",
-    //   url: "#",
-    //   icon: BookOpen,
-    //   items: [
-    //     {
-    //       title: "Introduction",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Get Started",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Tutorials",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Changelog",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
+    {
+      title: "Documentation",
+      url: "#",
+      icon: BookOpen,
+      items: [
+        {
+          title: "Introduction",
+          url: "#",
+        },
+        {
+          title: "Get Started",
+          url: "#",
+        },
+        {
+          title: "Tutorials",
+          url: "#",
+        },
+        {
+          title: "Changelog",
+          url: "#",
+        },
+      ],
+    },
 
     {
       title: "Settings",
       url: "/dashboard/settings",
       icon: Settings2,
-      isActive: true,
+      isActive: false,
       items: [
         {
           title: "Profile",
@@ -166,9 +165,11 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const user = useCurrentUser();
+  const [isMounted, setIsMounted] = React.useState(false);
 
-  // if(!user) return <>Login please!</>;
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <Sidebar variant="inset" {...props}>
@@ -195,9 +196,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        {/* <Suspense fallback={<p>Loading user...</p>}> */}
-        <NavUser user={user} />
-        {/* </Suspense> */}
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );

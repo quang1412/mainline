@@ -49,6 +49,7 @@ export const Navbar = () => {
 
   return (
     <section
+      suppressHydrationWarning={true}
       className={cn(
         "bg-background/70 absolute left-1/2 z-50 w-[min(90%,700px)] -translate-x-1/2 rounded-4xl border backdrop-blur-md transition-all duration-300",
         "top-5 lg:top-12",
@@ -119,11 +120,16 @@ export const Navbar = () => {
         <div className="flex items-center gap-2.5">
           <ThemeToggle />
 
-          <Link href="/dashboard" className="text-muted-foreground">
-            {/* <Button variant="outline"className="!p-2 "> */}
-            <UserStar className="size-5" />
-            {/* </Button> */}
-          </Link>
+          <Button
+            // href="/dashboard"
+            className="size-9 rounded-full"
+            variant="ghost"
+            size="icon"
+          >
+            <a href="/dashboard">
+              <UserStar />
+            </a>
+          </Button>
 
           {/* <Link href="/auth/login" className="max-lg:hidden">
             <Button variant="outline">
