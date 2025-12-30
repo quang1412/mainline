@@ -18,45 +18,75 @@ type SidebarNavProps = React.HTMLAttributes<HTMLElement> & {
   }[];
 };
 
+function scrollParentToCenterChildHorizontal(
+  parentElement: HTMLElement,
+  childElement: HTMLElement,
+) {
+  const parentWidth = parentElement.clientWidth; // Visible width of the parent
+  const childWidth = childElement.offsetWidth; // Total width of the child
+  const childOffsetLeft = childElement.offsetLeft; // Child's distance from the parent's left
+
+  // Calculate
+  //  target scroll position
+  const newScrollLeft = childOffsetLeft - parentWidth / 2 + childWidth / 2;
+
+  // Set the scroll position (smooth behavior needs CSS scroll-behavior: smooth)
+  parentElement.scrollTo({
+    left: newScrollLeft,
+    behavior: "auto", // smooth | auto
+  });
+}
+
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const pathname = usePathname();
-  const targetElementRef = useRef<null | HTMLAnchorElement>(null);
+  const scrollElmRef = useRef<HTMLDivElement>(null);
+  const scrollItemRefs = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    // Check if the current pathname is the target page (e.g., '/about')
-    if (targetElementRef.current) {
-      targetElementRef.current.scrollIntoView({
-        behavior: "smooth", // for a smooth scrolling effect
-        block: "start", // scrolls to the start of the element
-      });
-    } else if (pathname === "/") {
-      // Optional: scroll to the top for the home page
-      window.scrollTo(0, 0);
-    }
+    const fn = () => {
+      try {
+        const parent = scrollElmRef.current?.querySelector(
+          "div",
+        ) as HTMLElement;
+        const item = scrollItemRefs.current.find(
+          (link) => pathname == link.getAttribute("href"),
+        );
+        return (
+          parent && item && scrollParentToCenterChildHorizontal(parent, item)
+        );
+      } catch (error) {}
+    };
+    return fn();
   }, [pathname]); // Rerun effect when pathname changes
 
   return (
     <div className="w-full">
-      <ScrollArea className="bg-muted lg:bg-background h-auto rounded-xl px-1 lg:h-auto lg:max-h-100 lg:min-h-20">
+      <ScrollArea
+        className="bg-muted lg:bg-background h-auto rounded-xl px-1 lg:h-auto lg:max-h-100 lg:min-h-20"
+        ref={scrollElmRef}
+      >
         <ScrollBar orientation="horizontal" className="hidden" />
         <ScrollBar orientation="vertical" className="hidden" />
         <nav
           className={cn(
+            "sticky",
             "flex space-x-2 py-1 lg:flex-col lg:space-y-1 lg:space-x-0",
             className,
           )}
           {...props}
         >
-          {items.map((item) => (
+          {items.map((item, index) => (
             <Link
-              ref={targetElementRef}
+              ref={(el) => {
+                el && scrollItemRefs.current.push(el);
+              }}
               key={item.href}
               href={item.href}
               className={cn(
                 buttonVariants({
                   variant: "ghost",
                   size: "sm",
-                  className: "rounded-lg",
+                  className: "cursor-pointer rounded-lg",
                 }),
                 pathname === item.href
                   ? "lg:bg-muted lg:dark:bg-muted bg-white dark:bg-black/90"
@@ -64,6 +94,8 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
                 "justify-start",
                 "hover:bg-white dark:hover:bg-black/90",
                 "lg:hover:bg-muted lg:dark:hover:bg-muted",
+
+                "",
               )}
             >
               <span className="me-2">{item.icon}</span>
