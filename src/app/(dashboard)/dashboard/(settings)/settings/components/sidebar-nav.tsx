@@ -66,14 +66,19 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   return (
     <div className="w-full">
       <ScrollArea
-        className="bg-muted lg:bg-background h-auto rounded-xl px-1 lg:h-auto lg:max-h-100 lg:min-h-20"
+        className={cn(
+          // "px-1 py-1",
+          "border-muted border-2",
+          "bg-muted lg:bg-background h-auto rounded-lg lg:h-auto lg:max-h-100 lg:min-h-20",
+        )}
+        // className="bg-muted lg:bg-background h-auto rounded-xl px-1 lg:h-auto lg:max-h-100 lg:min-h-20"
         ref={scrollElmRef}
       >
         <ScrollBar orientation="horizontal" className="hidden" />
         <ScrollBar orientation="vertical" className="hidden" />
         <nav
           className={cn(
-            "flex space-x-2 py-1 lg:flex-col lg:space-y-1 lg:space-x-0",
+            "flex space-x-2 lg:flex-col lg:space-y-1 lg:space-x-0",
             className,
           )}
           {...props}
